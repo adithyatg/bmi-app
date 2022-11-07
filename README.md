@@ -1,6 +1,6 @@
-# trial_project
+# BMI calculator
 
-A trial flutter project
+A flutter project
 
 ## Getting Started
 
