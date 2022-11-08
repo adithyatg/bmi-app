@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
+import 'package:trial_project/second_pg.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
+
   @override
+
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
         primaryColor: Colors.blue,
       ),
       home: Demo(),
+      // initialRoute: '/',
+      // routes: {
+      //   '/' : (context)=>Demo(),
+      //   '/second' : (context)=>SecondPage(res: res)
+      // },
     );
   }
 }
@@ -35,11 +43,21 @@ class _DemoState extends State<Demo> {
         centerTitle: true,
         backgroundColor: Colors.blue,
       ),
+
       body: Container(
-        padding: EdgeInsets.symmetric(horizontal: 200.0),
+        padding: EdgeInsets.symmetric(horizontal: 200.0, vertical: 50),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          // mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            new Image.asset(
+              'images/bmi.jpg',
+              width: 700.0,
+              height: 140.0,
+              fit: BoxFit.fill,
+            ),
+            Text(
+              "\n\n"
+            ),
             TextField(
               controller: heightController,
               keyboardType: TextInputType.number,
@@ -60,17 +78,18 @@ class _DemoState extends State<Demo> {
 
             SizedBox(height: 35),
             Text(
-              res == 0 ? "Enter Value of height between 100 and 200 and weight greater than 0" : "BMI: ${res.toStringAsFixed(2)}",
+              // res == 0 ? "Enter Value of height between 100 and 200 and weight greater than 0" : "BMI: ${res.toStringAsFixed(2)}",
+              res == 0 ? "Enter Value of height between 100 and 200 and weight greater than 0" : "Enter Value of height between 100 and 200 and weight greater than 0",
               style: TextStyle(
                 color: Colors.blue,
-                fontSize: 20,
+                fontSize: 15,
               ),
             ),
           ],
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: calculateBMI,
+        onPressed: (weightController.text !=0 && heightController.text!=0 )  ? calculateBMI:(){},
         tooltip: 'Calculate',
         child: Text(
           'Calc',
@@ -95,5 +114,8 @@ class _DemoState extends State<Demo> {
     {
       res=0;
     }
+    Navigator.push(context, MaterialPageRoute(builder:(context)=> SecondPage(res: res,)) );
+
+    //Navigator.pushNamed(context, '/second')
   }
 }
